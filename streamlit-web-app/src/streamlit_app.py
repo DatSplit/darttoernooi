@@ -39,8 +39,8 @@ def main():
     tournament_type = st.selectbox("Kies het type toernooi:", ["Singles", "Doubles"])
 
     st.text("QR-code voor betaling, €5 euro per team")
-    #display_image("streamlit-web-app/src/betalen.png")
-    display_image("betalen.png")
+    display_image("streamlit-web-app/src/betalen.png")
+    #display_image("betalen.png")
     if st.button("Verzend aanmelding"):
         try:
             add_submission_to_airtable(name, tournament_type)
