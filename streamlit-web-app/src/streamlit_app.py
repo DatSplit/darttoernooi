@@ -21,6 +21,7 @@ def add_submission_to_sharepoint(name, tournament_type):
 
     try:
         ctx = ClientContext(site_url).with_credentials(UserCredential(username, password))
+        print(ctx.web.lists)
         sp_list = ctx.web.lists.get_by_title(list_name)
         item_properties = {
             "Title": "aanmelding",
