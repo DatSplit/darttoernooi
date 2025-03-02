@@ -5,7 +5,7 @@ import streamlit.components.v1 as components
 def display_image(file_path):
     st.image(file_path, caption="QR-code voor betaling, €5 per team")
 
-def save_to_database(name, tournament_type, entrance_fee):
+def save_data(name, tournament_type, entrance_fee):
     with open("submissions.txt", "a", encoding="utf-8") as f:
         f.write(f"{name},{tournament_type},{entrance_fee}\n")
     return True
@@ -28,7 +28,7 @@ def main():
     
     if st.button("Verzend aanmelding"):
         if name and tournament_type:
-            save_to_database(name, tournament_type, entrance_fee)
+            save_data(name, tournament_type, entrance_fee)
             st.success("Aanmelding succesvol verzonden!")
         else:
             st.error("Vul alstublieft alle velden in.")
