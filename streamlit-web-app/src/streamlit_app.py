@@ -26,7 +26,7 @@ def main():
     entrance_fee = 5
 
     st.text("QR-code voor betaling, €5 euro per team")
-    display_pdf("datsplit/darttoernooi/Master/streamlit-web-app/src/QR_Rabobank_Test_2025-03-02.pdf")
+    display_pdf("streamlit-web-app/src/QR_Rabobank_Test_2025-03-02.pdf")
     
     if st.button("Verzend aanmelding"):
         if name and tournament_type:
