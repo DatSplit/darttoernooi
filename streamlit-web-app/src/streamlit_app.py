@@ -10,21 +10,29 @@ def add_submission_to_sharepoint(name, tournament_type):
     from office365.sharepoint.client_context import ClientContext
     from office365.runtime.auth.user_credential import UserCredential
 
-    site_url = st.secrets["sharepoint"]["site_url"]
-    username = st.secrets["sharepoint"]["username"]
-    password = st.secrets["sharepoint"]["password"]
-    list_name = st.secrets["sharepoint"]["list_name"]
+    try:
+        site_url = st.secrets["sharepoint"]["site_url"]
+        username = st.secrets["sharepoint"]["username"]
+        password = st.secrets["sharepoint"]["password"]
+        list_name = st.secrets["sharepoint"]["list_name"]
+    except KeyError as e:
+        st.error(f"Missing secret value: {e}")
+        raise
 
-    ctx = ClientContext(site_url).with_credentials(UserCredential(username, password))
-    sp_list = ctx.web.lists.get_by_title(list_name)
-    item_properties = {
-        "Title": "aanmelding",
-        "Name": name,
-        "Toernooi_type": tournament_type
-    }
-    sp_list.add_item(item_properties)
-    ctx.execute_query()
-    return True
+    try:
+        ctx = ClientContext(site_url).with_credentials(UserCredential(username, password))
+        sp_list = ctx.web.lists.get_by_title(list_name)
+        item_properties = {
+            "Title": "aanmelding",
+            "Name": name,
+            "Toernooi_type": tournament_type
+        }
+        sp_list.add_item(item_properties)
+        ctx.execute_query()
+        return True
+    except Exception as e:
+        st.error(f"SharePoint error: {e}")
+        raise
 
 def main():
     st.title("Dart-toernooi VVA Achterberg 11 april 2025 aanmeldformulier")
