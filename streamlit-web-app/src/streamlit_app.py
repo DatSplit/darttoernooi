@@ -3,7 +3,7 @@ import base64
 import streamlit.components.v1 as components
 
 def display_image(file_path):
-    st.image(file_path, caption="QR-code voor betaling, €5 per team", use_column_width=True)
+    st.image(file_path, caption="QR-code voor betaling, €5 per team")
 
 def save_to_database(name, tournament_type, entrance_fee):
     with open("submissions.txt", "a", encoding="utf-8") as f:
