@@ -37,7 +37,7 @@ def main():
     # Tournament type selection
     tournament_type = st.selectbox("Kies het type toernooi:", ["Singles", "Doubles"])
 
-
+    st.write("List name from secrets:", st.secrets["sharepoint"]["list_name"])
     st.text("QR-code voor betaling, €5 euro per team")
     display_image("streamlit-web-app/src/betalen.png")
     
