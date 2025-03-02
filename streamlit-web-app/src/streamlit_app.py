@@ -42,13 +42,13 @@ def main():
     display_image("streamlit-web-app/src/betalen.png")
     
     if st.button("Verzend aanmelding"):
-            try:
-                add_submission_to_sharepoint(name, tournament_type)
-                st.success("Aanmelding succesvol verzonden!")
-            except Exception as e:
-                st.error(f"Aanmelding opgeslagen maar mislukt om naar SharePoint te uploaden: {e}")
-        else:
-            st.error("Vul alstublieft alle velden in.")
+        try:
+            add_submission_to_sharepoint(name, tournament_type)
+            st.success("Aanmelding succesvol verzonden!")
+        except Exception as e:
+            st.error(f"Aanmelding opgeslagen maar mislukt om naar SharePoint te uploaden: {e}")
+    else:
+        st.error("Vul alstublieft alle velden in.")
 
 if __name__ == "__main__":
     main()
