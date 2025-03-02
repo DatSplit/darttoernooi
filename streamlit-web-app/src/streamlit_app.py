@@ -1,39 +1,31 @@
 import streamlit as st
 import base64
-import streamlit.components.v1 as components
+import os
+from pyairtable import Api
 
 def display_image(file_path):
     st.image(file_path, caption="QR-code voor betaling, €5 per team")
 
+#https://airtable.com/appFQrfgHHc7pQ3Bd/tblnLJ33Eo5q73Cot/viwaUw0FiUO9lpqHh?blocks=hide
+def add_submission_to_airtable(name, tournament_type):
+    import requests
+    from datetime import datetime
+    # Generate uuid
+    import uuid
+    uuid = uuid.uuid4().hex
+    # Airtable API credentials (add to .streamlit/secrets.toml)
+    base_id = st.secrets["airtable"]["base_id"]
+    table_id = st.secrets["airtable"]["table_id"]
+    api = Api(st.secrets["airtable"]["api_key"])
+    table = api.table(base_id, table_id)
+    data = {
 
-def add_submission_to_sharepoint(name, tournament_type):
-    from office365.sharepoint.client_context import ClientContext
-    from office365.runtime.auth.user_credential import UserCredential
-
-    try:
-        site_url = st.secrets["sharepoint"]["site_url"]
-        username = st.secrets["sharepoint"]["username"]
-        password = st.secrets["sharepoint"]["password"]
-        list_name = st.secrets["sharepoint"]["list_name"]
-    except KeyError as e:
-        st.error(f"Missing secret value: {e}")
-        raise
-
-    try:
-        ctx = ClientContext(site_url).with_credentials(UserCredential(username, password))
-        print(ctx.web.lists)
-        sp_list = ctx.web.lists.get_by_title(list_name)
-        item_properties = {
-            "Title": "aanmelding",
-            "Name": name,
-            "Toernooi_type": tournament_type
-        }
-        sp_list.add_item(item_properties)
-        ctx.execute_query()
-        return True
-    except Exception as e:
-        st.error(f"SharePoint error: {e}")
-        raise
+            "Name": uuid,
+            "Deelnemer": name,
+            "Tournament Type": tournament_type,
+            "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+    table.create(data)
 
 def main():
     st.title("Dart-toernooi VVA Achterberg 11 april 2025 aanmeldformulier")
@@ -47,16 +39,14 @@ def main():
     tournament_type = st.selectbox("Kies het type toernooi:", ["Singles", "Doubles"])
 
     st.text("QR-code voor betaling, €5 euro per team")
-    display_image("streamlit-web-app/src/betalen.png")
-    
+    #display_image("streamlit-web-app/src/betalen.png")
+    display_image("betalen.png")
     if st.button("Verzend aanmelding"):
         try:
-            add_submission_to_sharepoint(name, tournament_type)
+            add_submission_to_airtable(name, tournament_type)
             st.success("Aanmelding succesvol verzonden!")
         except Exception as e:
-            st.error(f"Aanmelding opgeslagen maar mislukt om naar SharePoint te uploaden: {e}")
-    else:
-        st.error("Vul alstublieft alle velden in.")
+            st.error(f"{e}")
 
 if __name__ == "__main__":
     main()
