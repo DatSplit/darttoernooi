@@ -32,7 +32,7 @@ def add_submission_to_airtable(name, tournament_type, email, phone, bankrekening
     table.create(data)
 
 def main():
-    st.logo("streamlit-web-app/src/vva71-logo.png", 'large')
+    st.logo("streamlit-web-app/src/vva71-logo.png", size='large')
     st.title("Aanmeldformulier dart-toernooi VVA Achterberg 11 april 2025")
     st.text("Welkom op het aanmeldformulier voor het dart-toernooi van VVA Achterberg op 11 april 2025.")
     st.text("Het toernooi gaat plaatsvinden op vrijdag 11 april 2025 van 18:30 (inloop) en 19:00 (start wedstrijden) bij VVA Achterberg op de Zuidelijke Meentsteeg 33 in Achterberg. U kunt zich aanmelden voor het singlestoernooi, dubbels toernooi, of beide. Kosten voor deelname zijn 5€ per persoon. Vul onderstaande gegevens in om je aan te melden voor het toernooi en betaal het betaalverzoek hieronder.")
