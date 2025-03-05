@@ -48,7 +48,7 @@ def main():
     
 
     st.text("QR-code of betaalverzoek om te betalen, €5 euro per persoon:")
-    st.text("betaalverzoek: https://betaalverzoek.rabobank.nl/betaalverzoek/?id=N75DvVtxRDe6sbvWyqMZkQ")
+    st.markdown("[Klik hier voor het betaalverzoek](https://betaalverzoek.rabobank.nl/betaalverzoek/?id=N75DvVtxRDe6sbvWyqMZkQ)")
     display_image("streamlit-web-app/src/betalen.png")
     #display_image("betalen.png")
     if st.button("Aanmelden"):
