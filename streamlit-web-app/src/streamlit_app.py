@@ -26,7 +26,9 @@ def add_submission_to_airtable(name, tournament_type, email, phone, bankrekening
             "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "email_address": email,
             "phone_number": phone,
-            "IBAN": bankrekeningsnummer
+            "IBAN": bankrekeningsnummer,
+            "dubbel_partner": dubbel_partner,
+            "team_naam": team_name
 
     }
     table.create(data)
