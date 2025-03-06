@@ -38,7 +38,8 @@ def main():
     st.title("Aanmeldformulier dart-toernooi VVA Achterberg 11 april 2025")
     st.text("Welkom op het aanmeldformulier voor het dart-toernooi van VVA Achterberg op 11 april 2025.")
     st.text("Het toernooi gaat plaatsvinden op vrijdag 11 april 2025 van 18:30 (inloop) en 19:00 (start wedstrijden) bij VVA Achterberg op de Zuidelijke Meentsteeg 33 in Achterberg. U kunt zich aanmelden voor het singlestoernooi, dubbels toernooi, of beide. Kosten voor deelname zijn 5€ per persoon. Vul onderstaande gegevens in om je aan te melden voor het toernooi en betaal het betaalverzoek hieronder.")
-    
+    dubbel_partner = None
+    team_name = None
     # User input for name
     name = st.text_input("Voornaam, achternaam, en dartnaam:")
     tournament_type = st.selectbox("Kies het type toernooi:", ["Singles", "Dubbels", "Singles en dubbels"])
