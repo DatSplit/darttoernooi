@@ -42,7 +42,7 @@ def main():
     # User input for name
     name = st.text_input("Voornaam, achternaam, en dartnaam:")
     tournament_type = st.selectbox("Kies het type toernooi:", ["Singles", "Dubbels", "Singles en dubbels"])
-    if tournament_type == "Singles en dubbels" or tournament_type == "Dubbels":
+    if tournament_type in ["Dubbels", "Singles en dubbels"]:
         dubbel_partner = st.text_input("Naam van uw dubbelpartner:")
         team_name = st.text_input("Teamnaam:")
     email = st.text_input("E-mailadres:")
