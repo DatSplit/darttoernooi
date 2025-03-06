@@ -7,7 +7,7 @@ def display_image(file_path):
     st.image(file_path, caption="QR-code voor betaling, €5 per team")
 
 #https://airtable.com/appFQrfgHHc7pQ3Bd/tblnLJ33Eo5q73Cot/viwaUw0FiUO9lpqHh?blocks=hide
-def add_submission_to_airtable(name, tournament_type, email, phone, bankrekeningsnummer):
+def add_submission_to_airtable(name, tournament_type, email, phone, bankrekeningsnummer, dubbel_partner=None, team_name=None):
     import requests
     from datetime import datetime
     # Generate uuid
@@ -40,6 +40,9 @@ def main():
     # User input for name
     name = st.text_input("Voornaam, achternaam, en dartnaam:")
     tournament_type = st.selectbox("Kies het type toernooi:", ["Singles", "Dubbels", "Singles en dubbels"])
+    if tournament_type == "Singles en dubbels" or tournament_type == "Dubbels":
+        dubbel_partner = st.text_input("Naam van uw dubbelpartner:")
+        team_name = st.text_input("Teamnaam:")
     email = st.text_input("E-mailadres:")
     phone = st.text_input("Telefoonnummer:")
     bankrekeningsnummer = st.text_input("Bankrekeningsnummer (IBAN):")
@@ -53,7 +56,7 @@ def main():
     #display_image("betalen.png")
     if st.button("Aanmelden"):
         try:
-            add_submission_to_airtable(name, tournament_type, email, phone, bankrekeningsnummer)
+            add_submission_to_airtable(name, tournament_type, email, phone, bankrekeningsnummer, dubbel_partner, team_name)
             st.success("Aanmelding succesvol ontvangen! Tot 11 april 2025!")
         except Exception as e:
             st.error(f"{e}")
